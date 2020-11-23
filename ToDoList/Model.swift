@@ -10,25 +10,18 @@ import Foundation
 
 
 // Save changes with UserDefault
-
 var ToDoItems: [[String: Any]] {
-    
     set {
-      
         UserDefaults.standard.set(newValue, forKey: "ToDoItems")
         UserDefaults.standard.synchronize()
-        
     }
     
     get {
-        
         if let array = UserDefaults.standard.array(forKey: "ToDoItems") as? [[String:Any]]
-            
         {
             return array
             
         } else {
-            
             return []
         }
     }
