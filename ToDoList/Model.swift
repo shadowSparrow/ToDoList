@@ -31,11 +31,14 @@ func removeItem (index: Int) {
     ToDoItems.remove(at: index)
 }
 
+/*
 func moveRow(fromIndex: Int, toIndex: Int) {
     let from = ToDoItems[fromIndex]
     ToDoItems.remove(at: fromIndex)
     ToDoItems.insert(from, at: toIndex)
 }
+*/
+
 
 func changeState(item: Int) -> Bool {
     ToDoItems[item]["isCompleted"] = !(ToDoItems[item]["isCompleted"] as! Bool)

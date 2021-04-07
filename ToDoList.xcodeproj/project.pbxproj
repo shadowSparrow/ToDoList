@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04EB8086261659470069A106 /* CoreList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04EB8084261659470069A106 /* CoreList.xcdatamodeld */; };
+		04EB8097261DD7490069A106 /* List+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB8095261DD7490069A106 /* List+CoreDataClass.swift */; };
+		04EB8098261DD7490069A106 /* List+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB8096261DD7490069A106 /* List+CoreDataProperties.swift */; };
 		F434FE62252D3A4700331C33 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434FE61252D3A4700331C33 /* LaunchViewController.swift */; };
 		F4CAA037231AB648007C1E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA036231AB648007C1E84 /* AppDelegate.swift */; };
 		F4CAA03C231AB648007C1E84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4CAA03A231AB648007C1E84 /* Main.storyboard */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04EB8085261659470069A106 /* CoreList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreList.xcdatamodel; sourceTree = "<group>"; };
+		04EB8095261DD7490069A106 /* List+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+CoreDataClass.swift"; sourceTree = "<group>"; };
+		04EB8096261DD7490069A106 /* List+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F434FE61252D3A4700331C33 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		F4CAA033231AB648007C1E84 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4CAA036231AB648007C1E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +48,9 @@
 		F4CAA02A231AB648007C1E84 = {
 			isa = PBXGroup;
 			children = (
+				04EB8095261DD7490069A106 /* List+CoreDataClass.swift */,
+				04EB8096261DD7490069A106 /* List+CoreDataProperties.swift */,
+				04EB8084261659470069A106 /* CoreList.xcdatamodeld */,
 				F4CAA035231AB648007C1E84 /* ToDoList */,
 				F4CAA034231AB648007C1E84 /* Products */,
 			);
@@ -97,7 +106,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Alexander Romanenko";
 				TargetAttributes = {
 					F4CAA032231AB648007C1E84 = {
@@ -143,8 +152,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4CAA04B231C2B81007C1E84 /* Model.swift in Sources */,
+				04EB8097261DD7490069A106 /* List+CoreDataClass.swift in Sources */,
 				F4CAA037231AB648007C1E84 /* AppDelegate.swift in Sources */,
 				F4CAA049231C2B0E007C1E84 /* TableViewController.swift in Sources */,
+				04EB8086261659470069A106 /* CoreList.xcdatamodeld in Sources */,
+				04EB8098261DD7490069A106 /* List+CoreDataProperties.swift in Sources */,
 				F434FE62252D3A4700331C33 /* LaunchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +209,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -258,6 +271,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -345,6 +359,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		04EB8084261659470069A106 /* CoreList.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				04EB8085261659470069A106 /* CoreList.xcdatamodel */,
+			);
+			currentVersion = 04EB8085261659470069A106 /* CoreList.xcdatamodel */;
+			path = CoreList.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F4CAA02B231AB648007C1E84 /* Project object */;
 }
