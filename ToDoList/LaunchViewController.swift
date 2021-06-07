@@ -11,19 +11,26 @@ import UIKit
 class LaunchViewController: UIViewController {
 
     @IBOutlet weak var imageFish: UIImageView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        imageFish.image = UIImage(named: "whiteFingerPrint")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         navigationController?.setNavigationBarHidden(true, animated: false)
-        imageFish.image = UIImage(named: "RoundedIcon")
-        UIView.animate(withDuration: 3, animations: {
-        self.imageFish.transform = CGAffineTransform(rotationAngle: .pi)
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        UIView.animate(withDuration: 1, animations: {
+            self.imageFish.transform = CGAffineTransform(rotationAngle: .pi/2)
         }) { (Bool) in
-            
             let mainStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
             let secondVC = mainStoryboard.instantiateViewController(withIdentifier: "secondVC") as? TableViewController
             self.navigationController?.pushViewController(secondVC!, animated: true)
-        }
+        
     }
+   }
 }

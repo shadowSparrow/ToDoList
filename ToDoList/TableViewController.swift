@@ -11,108 +11,98 @@ import CoreData
 
 class TableViewController: UITableViewController {
     
+   //MARK: - IBoutlets
     @IBOutlet weak var Add: UIBarButtonItem!
+    @IBOutlet weak var editButton: UIBarButtonItem!
     
-    var items: [List]?
+    
+    // MARK: - CoreDataProperties
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    @IBAction func addAction(_ sender: Any) {
-        
-    let alert = UIAlertController(title: "NewItem", message: nil, preferredStyle: .alert)
-        
-        alert.addTextField { (UITextField) in
-            UITextField.placeholder = "NewItemName"
-        }
-        
-        let action1 = UIAlertAction(title: "add", style: .default) { (action1) in
-        
-        let newItem = alert.textFields![0]
-            let item = List(context: self.context)
-            
-            item.item = newItem.text
-            
-            // SaveItem
-            try! self.context.save()
-            
-            //RefetchItems
-            self.fetchItems()
-            
-            //addItem(nameItem: newItem!, isCompleted: false)
-        //self.tableView.reloadData()
-        }
-        
-        let action2 = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alert.addAction(action1)
-        alert.addAction(action2)
-        present(alert, animated: true)
-        
-    }
+    var CoreDataArray: [Words]?
+
     
     override func viewDidLoad() {
-        fetchItems()
-    }
+    
+        // MARK: - TableViewLook
+        self.tableView.tintColor = .white
+        let backgroundImage = UIImage(named: "secondBackGround")
+        self.tableView.backgroundView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundColor = .black
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        fetchItems()
+        
+    }
+    
+
+    // MARK: - CoreDataMethodes
     func fetchItems() {
-        items = try! context.fetch(List.fetchRequest())
+        let request = Words.fetchRequest() as NSFetchRequest<Words>
+        let sort = NSSortDescriptor(key: "index", ascending: false)
+        request.sortDescriptors = [sort]
+        CoreDataArray = try! context.fetch(request)
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-    
     }
-   
-   /*
-    func moveRow(fromIndex: Int, toIndex: Int) {
-        let from = items![fromIndex]
-        items!.remove(at: fromIndex)
-        items!.insert(from, at: toIndex)
-    }
-    
-*/
-    @IBAction func edit(_ sender: Any) {
+ 
+    // MARK: - IBActions
+    @IBAction func editButton(_ sender: UIBarButtonItem) {
         tableView.setEditing(!tableView.isEditing, animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        self.tableView.reloadData()
-        }
+        
     }
+    @IBAction func addAction(_ sender: Any) {
+        
+        let mainStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+        let ThirdVC = mainStoryboard.instantiateViewController(withIdentifier: "ThirdVC") as? WordsCard
+        
+        ThirdVC?.color = .black
+        ThirdVC?.addWordDelegate = self
+        self.navigationController?.pushViewController(ThirdVC!,animated: true)
     
-    // MARK: - Table view data source
+    }
    
+    // MARK: - TableViewDataSourceAndDelegate
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
         -> Int {
-        return items!.count
+        guard CoreDataArray != nil else {return 0}
+        return  CoreDataArray!.count //array.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Сellidentifier", for: indexPath)
-        let currentItem = items![indexPath.row]
-        //let currentItem = items![indexPath.row]
-        cell.textLabel?.text = currentItem.item
-            //currentItem ["Name"] as? String
+        
+        guard CoreDataArray != nil else {return cell}
+       
+        try! context.save()
+        let storedWords = CoreDataArray![indexPath.row]
+        
+        cell.textLabel?.text = storedWords.name
+        cell.detailTextLabel?.textColor = .black
+        cell.detailTextLabel?.text = storedWords.translation
+        
         return cell
-        
-        
     
-        /*
-        if (currentItem["isCompleted"] as? Bool) == true {
-            cell.imageView?.image = UIImage(named: "check1x")
-        } else {
-            cell.imageView?.image = UIImage(named: "uncheck1x")
-        }
-            if tableView.isEditing {
-                cell.textLabel?.alpha = 0.4
-                cell.imageView?.alpha = 0.4
-            } else {
-                cell.textLabel?.alpha = 1
-                cell.imageView?.alpha = 1
-        }*/
+}
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-    }
-    
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextVC = storyboard.instantiateViewController(withIdentifier: "ThirdVC") as? WordsCard
+        nextVC?.addWordDelegate = self
+        //nextVC?.isHidden = true
+        guard cell?.textLabel?.text != "" else {return}
+        nextVC?.editedtext = (cell?.textLabel?.text)!
+        //nextVC?.wordText =
+        
+        show(nextVC!, sender: nil)
+        
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -120,86 +110,103 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard CoreDataArray != nil else {return}
+        let movedWord = CoreDataArray![sourceIndexPath.row]
+        CoreDataArray?.remove(at: sourceIndexPath.row)
+        CoreDataArray?.insert(movedWord, at: destinationIndexPath.row)
+        try! context.save()
         
     }
-    
-    
-    
 
-    /*
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let action = UIContextualAction(style: .normal, title: "delete") { (action, view, handler) in
-            let itemToRemove = self.items![indexPath.row]
-            self.context.delete(itemToRemove)
-            try! self.context.save()
-            self.fetchItems()
-        }
-        
-        return UISwipeActionsConfiguration(actions: [action])
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
     }
-    */
-    // Override to support editing the table view.
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            let itemToRemove = items![indexPath.row]
-            self.context.delete(itemToRemove)
-            try! self.context.save()
-            self.fetchItems()
-            
-        } else if editingStyle == .insert {
-        }    
+   
+            if editingStyle == .delete {
+                let wordToRemove = CoreDataArray![indexPath.row]
+                self.context.delete(wordToRemove)
+                try! self.context.save()
+                self.fetchItems()
+                
+            } else if editingStyle == .insert {
+        }
     }
- 
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        if tableView.isEditing {
-            return .none
+}
+
+
+// MARK: - AddNewWordDelegateExtension
+extension TableViewController: AddNewWordDelegate {
+    
+    
+    func getArrayOfNames() -> [String] {
+        
+        var names:[String] = []
+        guard CoreDataArray != nil else {return []}
+        for name in CoreDataArray! {
+            names.append(name.name!)
+        }
+        print("HereisAnArray\(names)")
+
+        return names
+        
+    }
+    
+    func shouldReplace(item: String, withItem newItem: String)
+    
+    {
+        for i in CoreDataArray! {
+            
+            if i.name == item {
+                print("ItExists")
+                i.name = newItem
+            }
+            else {
+                print("NoSuchAElement")
+            }
+            
+        }
+     
+        
+    }
+        
+      
+    
+    
+    
+func isItemExist(item: String) -> Bool {
+    
+    var bool: Bool?
+    //guard bool != nil else {return false}
+    for name in CoreDataArray! {
+        if name.name == item {
+    bool = true
         } else {
-            return .delete
+            bool = false
         }
     }
     
-    
-    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-       
-//        let selectedItem = items![indexPath.row]
-        var selectedItem = items![indexPath.row]
-        let alert = UIAlertController(title: "Edit", message: nil, preferredStyle: .alert)
-        alert.addTextField()
-        
-        let textField = alert.textFields![0]
-        textField.text = selectedItem.item
-        
-        let action = UIAlertAction(title: "SaveButton", style: .default) { (alertAction) in
-            
-            let textField = alert.textFields![0]
-            selectedItem.item = textField.text
-           
-            try! self.context.save()
-            self.fetchItems()
-        }
-        
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-        
+    //guard bool != nil else {return false}
+    return bool!
+}
+//MARK: - UsingGetArrayOfnamesFunc
         /*
-        tableView.deselectRow(at: indexPath, animated: true)
-        if changeState(item: indexPath.row) == true {
-            tableView.cellForRow(at: indexPath)?.imageView?.image = UIImage(named: "check1x")
+        if let _ = getArrayOfNames().lastIndex(of: item){
+            return true
         } else {
-            tableView.cellForRow(at: indexPath)?.imageView?.image = UIImage(named:"uncheck1x")
+            return false
         }
-        */
+ */
+   
+    func addWord(word: String) {
+        let newWord = Words(context: context)
+        newWord.name = word
+        //newWord.translation = translation
+        CoreDataArray?.append(newWord)
+         try! context.save()
+        tableView.reloadData()
+    
+    }
 }
-    
-    
-    
-}
-
-
 

@@ -7,31 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04EB8086261659470069A106 /* CoreList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04EB8084261659470069A106 /* CoreList.xcdatamodeld */; };
-		04EB8097261DD7490069A106 /* List+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB8095261DD7490069A106 /* List+CoreDataClass.swift */; };
-		04EB8098261DD7490069A106 /* List+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB8096261DD7490069A106 /* List+CoreDataProperties.swift */; };
+		041DF0EE262C629500F0DF49 /* Words.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 041DF0EC262C629500F0DF49 /* Words.xcdatamodeld */; };
+		0482AF17262CC37E00B2F6A3 /* WordsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0482AF16262CC37E00B2F6A3 /* WordsCard.swift */; };
+		04C6299E263DCA45002C161E /* Words+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6299C263DCA45002C161E /* Words+CoreDataClass.swift */; };
+		04C6299F263DCA45002C161E /* Words+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6299D263DCA45002C161E /* Words+CoreDataProperties.swift */; };
+		04DD6294264C0D3D00023931 /* designPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DD6293264C0D3D00023931 /* designPatterns.swift */; };
+		04DD62AB265D537300023931 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DD62AA265D537300023931 /* Protocols.swift */; };
 		F434FE62252D3A4700331C33 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434FE61252D3A4700331C33 /* LaunchViewController.swift */; };
 		F4CAA037231AB648007C1E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA036231AB648007C1E84 /* AppDelegate.swift */; };
 		F4CAA03C231AB648007C1E84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4CAA03A231AB648007C1E84 /* Main.storyboard */; };
 		F4CAA03E231AB649007C1E84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4CAA03D231AB649007C1E84 /* Assets.xcassets */; };
 		F4CAA041231AB649007C1E84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4CAA03F231AB649007C1E84 /* LaunchScreen.storyboard */; };
 		F4CAA049231C2B0E007C1E84 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA048231C2B0E007C1E84 /* TableViewController.swift */; };
-		F4CAA04B231C2B81007C1E84 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA04A231C2B81007C1E84 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		04EB8085261659470069A106 /* CoreList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreList.xcdatamodel; sourceTree = "<group>"; };
-		04EB8095261DD7490069A106 /* List+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+CoreDataClass.swift"; sourceTree = "<group>"; };
-		04EB8096261DD7490069A106 /* List+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		041DF0ED262C629500F0DF49 /* Words.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Words.xcdatamodel; sourceTree = "<group>"; };
+		0482AF16262CC37E00B2F6A3 /* WordsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsCard.swift; sourceTree = "<group>"; };
+		04C6299C263DCA45002C161E /* Words+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Words+CoreDataClass.swift"; sourceTree = "<group>"; };
+		04C6299D263DCA45002C161E /* Words+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Words+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		04DD6293264C0D3D00023931 /* designPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = designPatterns.swift; sourceTree = "<group>"; };
+		04DD62AA265D537300023931 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		F434FE61252D3A4700331C33 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
-		F4CAA033231AB648007C1E84 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4CAA033231AB648007C1E84 /* WordList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4CAA036231AB648007C1E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4CAA03B231AB648007C1E84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F4CAA03D231AB649007C1E84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4CAA040231AB649007C1E84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4CAA042231AB649007C1E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4CAA048231C2B0E007C1E84 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		F4CAA04A231C2B81007C1E84 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,12 +49,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0485725F265DD03F00C4016B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				041DF0EC262C629500F0DF49 /* Words.xcdatamodeld */,
+				04C6299D263DCA45002C161E /* Words+CoreDataProperties.swift */,
+				04C6299C263DCA45002C161E /* Words+CoreDataClass.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		F4CAA02A231AB648007C1E84 = {
 			isa = PBXGroup;
 			children = (
-				04EB8095261DD7490069A106 /* List+CoreDataClass.swift */,
-				04EB8096261DD7490069A106 /* List+CoreDataProperties.swift */,
-				04EB8084261659470069A106 /* CoreList.xcdatamodeld */,
+				0485725F265DD03F00C4016B /* CoreData */,
 				F4CAA035231AB648007C1E84 /* ToDoList */,
 				F4CAA034231AB648007C1E84 /* Products */,
 			);
@@ -59,7 +71,7 @@
 		F4CAA034231AB648007C1E84 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F4CAA033231AB648007C1E84 /* ToDoList.app */,
+				F4CAA033231AB648007C1E84 /* WordList.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -68,9 +80,11 @@
 			isa = PBXGroup;
 			children = (
 				F4CAA036231AB648007C1E84 /* AppDelegate.swift */,
-				F4CAA04A231C2B81007C1E84 /* Model.swift */,
-				F4CAA048231C2B0E007C1E84 /* TableViewController.swift */,
 				F434FE61252D3A4700331C33 /* LaunchViewController.swift */,
+				F4CAA048231C2B0E007C1E84 /* TableViewController.swift */,
+				0482AF16262CC37E00B2F6A3 /* WordsCard.swift */,
+				04DD62AA265D537300023931 /* Protocols.swift */,
+				04DD6293264C0D3D00023931 /* designPatterns.swift */,
 				F4CAA03A231AB648007C1E84 /* Main.storyboard */,
 				F4CAA03D231AB649007C1E84 /* Assets.xcassets */,
 				F4CAA03F231AB649007C1E84 /* LaunchScreen.storyboard */,
@@ -82,9 +96,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F4CAA032231AB648007C1E84 /* ToDoList */ = {
+		F4CAA032231AB648007C1E84 /* WordList */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F4CAA045231AB649007C1E84 /* Build configuration list for PBXNativeTarget "ToDoList" */;
+			buildConfigurationList = F4CAA045231AB649007C1E84 /* Build configuration list for PBXNativeTarget "WordList" */;
 			buildPhases = (
 				F4CAA02F231AB648007C1E84 /* Sources */,
 				F4CAA030231AB648007C1E84 /* Frameworks */,
@@ -94,9 +108,9 @@
 			);
 			dependencies = (
 			);
-			name = ToDoList;
+			name = WordList;
 			productName = ToDoList;
-			productReference = F4CAA033231AB648007C1E84 /* ToDoList.app */;
+			productReference = F4CAA033231AB648007C1E84 /* WordList.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -115,7 +129,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F4CAA02E231AB648007C1E84 /* Build configuration list for PBXProject "ToDoList" */;
+			buildConfigurationList = F4CAA02E231AB648007C1E84 /* Build configuration list for PBXProject "WordList" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -128,7 +142,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F4CAA032231AB648007C1E84 /* ToDoList */,
+				F4CAA032231AB648007C1E84 /* WordList */,
 			);
 		};
 /* End PBXProject section */
@@ -151,13 +165,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4CAA04B231C2B81007C1E84 /* Model.swift in Sources */,
-				04EB8097261DD7490069A106 /* List+CoreDataClass.swift in Sources */,
 				F4CAA037231AB648007C1E84 /* AppDelegate.swift in Sources */,
+				04C6299E263DCA45002C161E /* Words+CoreDataClass.swift in Sources */,
+				04DD6294264C0D3D00023931 /* designPatterns.swift in Sources */,
+				04DD62AB265D537300023931 /* Protocols.swift in Sources */,
+				041DF0EE262C629500F0DF49 /* Words.xcdatamodeld in Sources */,
+				0482AF17262CC37E00B2F6A3 /* WordsCard.swift in Sources */,
 				F4CAA049231C2B0E007C1E84 /* TableViewController.swift in Sources */,
-				04EB8086261659470069A106 /* CoreList.xcdatamodeld in Sources */,
-				04EB8098261DD7490069A106 /* List+CoreDataProperties.swift in Sources */,
 				F434FE62252D3A4700331C33 /* LaunchViewController.swift in Sources */,
+				04C6299F263DCA45002C161E /* Words+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +356,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F4CAA02E231AB648007C1E84 /* Build configuration list for PBXProject "ToDoList" */ = {
+		F4CAA02E231AB648007C1E84 /* Build configuration list for PBXProject "WordList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F4CAA043231AB649007C1E84 /* Debug */,
@@ -349,7 +365,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F4CAA045231AB649007C1E84 /* Build configuration list for PBXNativeTarget "ToDoList" */ = {
+		F4CAA045231AB649007C1E84 /* Build configuration list for PBXNativeTarget "WordList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F4CAA046231AB649007C1E84 /* Debug */,
@@ -361,13 +377,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		04EB8084261659470069A106 /* CoreList.xcdatamodeld */ = {
+		041DF0EC262C629500F0DF49 /* Words.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				04EB8085261659470069A106 /* CoreList.xcdatamodel */,
+				041DF0ED262C629500F0DF49 /* Words.xcdatamodel */,
 			);
-			currentVersion = 04EB8085261659470069A106 /* CoreList.xcdatamodel */;
-			path = CoreList.xcdatamodeld;
+			currentVersion = 041DF0ED262C629500F0DF49 /* Words.xcdatamodel */;
+			path = Words.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
