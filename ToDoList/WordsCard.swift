@@ -8,16 +8,21 @@
 
 import UIKit
 
-class WordsCard: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate {
+class WordsCard: UIViewController, UITextFieldDelegate {
 
     // MARK: - IBOtlets
     @IBOutlet weak var backGroundView: UIView!
     @IBOutlet weak var imageView: UIImageView!
+    
+    
+    @IBOutlet weak var secondImageView: UIImageView!
+    
     @IBOutlet weak var wordTextField: UITextField!
     @IBOutlet weak var translationTextField: UITextField!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var navigationBar: UINavigationBar!
-   
+    @IBOutlet weak var delete: UIButton!
+    
     
     var addWordDelegate: AddNewWordDelegate!
     
@@ -25,7 +30,9 @@ class WordsCard: UIViewController, UINavigationControllerDelegate, UITextFieldDe
     var color = UIColor.black
     var wordText: String?
     var editedtext: String?
-    var translationText = ""
+    var editedTranlation: String?
+    var translationText: String?
+    var image: UIImage?
     
     
     
@@ -33,13 +40,23 @@ class WordsCard: UIViewController, UINavigationControllerDelegate, UITextFieldDe
         super.viewDidLoad()
         
         //MARK: - ElementInitialisation
+        
+        
         //DataPass
         
         
         if editedtext != nil {
             wordTextField.text = editedtext
+            imageView.image = image
         } else {
         wordTextField.text = wordText
+        }
+        
+        if editedTranlation != nil {
+            translationTextField.text = editedTranlation
+            imageView.image = image
+        } else {
+            translationTextField.text = translationText
         }
         
         //TexFieldsDelegate
@@ -79,7 +96,7 @@ class WordsCard: UIViewController, UINavigationControllerDelegate, UITextFieldDe
             textFieldDesign(element:wordTextField)
         
             //ImageViewDesign
-            imageView.image = UIImage(named: "violetCirclePles")
+            //imageView.image = UIImage(named: "")
             imageViewDesign(element: imageView)
            
     }
@@ -95,69 +112,99 @@ class WordsCard: UIViewController, UINavigationControllerDelegate, UITextFieldDe
             if (gesture.view as? UIImageView) != nil {
             let picker = UIImagePickerController()
             picker.sourceType = .photoLibrary
-            picker.delegate = self
             picker.allowsEditing = true
+            picker.delegate = self
             self.present(picker, animated: true, completion: nil)
             }
 }
     }
     
-    @IBAction func backTotableViewButton(_ sender: Any) {
-        
+    @IBAction func backAction(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
     
-        
-
+    @IBAction func deleteAction(_ sender: Any) {
+        guard let editedText = editedtext else { return}
+        addWordDelegate.deleteItem(name: editedtext!)
+        navigationController?.popViewController(animated:true)
+    }
+    
+    @IBAction func backTotableViewButton(_ sender: Any) {
         guard let text = wordTextField.text else { return }
+        guard let translation = translationTextField.text else {return}
+        //guard let image = imageView.image else {return}
         
         if text != "" {
         
         if let delegate = addWordDelegate {
             print("DelegateInitiated")
             
-            if  !delegate.isItemExist(item:text) {
+            if  !delegate.isItemExist(item:text, translation: translation)
+            
+            {
                 
-                if let editedText = editedtext {
-                 
-                print("Hello    \(editedText)")
-    
-                delegate.shouldReplace(item: editedText, withItem: text)
-    
-                    // TODO: - ImplementReplaceMethod
+                if editedtext != nil || editedTranlation != nil {
                 
-                } else {
+                var editedText = editedtext
+                print("Hello \(editedText)")
+                
+                delegate.shouldReplace(item: editedText!, withItem: text)
+                
+                var edTranslation = editedTranlation
+                print("Hello\(edTranslation)")
+        
+                delegate.translationReplace(translation: edTranslation!, with: translation)
+
+                }
+                
+                else {
                     
-                    delegate.addWord(word: text)
+                    if translationTextField == nil {
+                        
+                        var data: Data?
+                        if let image = imageView.image {
+                            data = image.pngData()
+                            print("ImageViewPicked")
+                        } else {
+                            let image = UIImage(named: "circlePlus")
+                            data = image?.pngData()
+                            print("ImageViewNotPicked")
+                        }
+                        
+                        delegate.addWord(word: text, translation: "Translation", image: data!)
+                      
+                    } else {
+                        
+                        var data: Data?
+                        if let image = imageView.image {
+                            data = image.pngData()
+                        
+                        } else {
+                            
+                            let image = UIImage(named: "circlePlus")
+                            data = image?.pngData()
+                            
+                        }
+                        delegate.addWord(word: text, translation: translation, image:data!)
+    
+                    }
                 }
                 
                 navigationController?.popViewController(animated: true)
                 
-                
-             
             } else {
             
-                let alert = UIAlertController(title: "Item exists", message: "\(wordTextField.text) already exists in your shopping list.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                let alert = UIAlertController(title: "Item exists", message: "\(wordTextField.text, translationTextField.text) already exists in your shopping list.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style:.default, handler: nil))
             present(alert, animated: true, completion: nil)
         }
+                
         } else {
             print("DelegateIsNotInitiated")
         }
 }
-
     }
       
-        
-  /*
-     // MARK: - UITextFieldDelegate
-     extension EditItemViewController: UITextFieldDelegate {
-         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-             saveItem(self)
-             return true
-         }
-     }
-     
- */
-    
     
 // MARK: - TextfieldDelegateMethodes
     
@@ -168,7 +215,6 @@ class WordsCard: UIViewController, UINavigationControllerDelegate, UITextFieldDe
         
         backTotableViewButton(self)
         
-        
         if textField == wordTextField{
             textField.resignFirstResponder()
             textField.isHidden = false
@@ -177,33 +223,34 @@ class WordsCard: UIViewController, UINavigationControllerDelegate, UITextFieldDe
         } else if textField == translationTextField {
             textField.resignFirstResponder()
             textField.isHidden = false
-            
-            //wordTextField.becomeFirstResponder()
-            //translationLabel.isHidden = false
-            //translationLabel.text = translationTextField.text
+        
         } else {
             print("Some stange is Happening")
         }
-        
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-    
     }
 }
+    
+
 
 
 // MARK: - ImagePickerControllerDelegate
-extension WordsCard: UIImagePickerControllerDelegate {
+extension WordsCard: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
+            //secondImageView.image = image
             imageView.image = image
         }
+        
         picker.dismiss(animated: true)
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
 }
+

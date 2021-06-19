@@ -14,7 +14,7 @@ class TableViewController: UITableViewController {
    //MARK: - IBoutlets
     @IBOutlet weak var Add: UIBarButtonItem!
     @IBOutlet weak var editButton: UIBarButtonItem!
-    
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     // MARK: - CoreDataProperties
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -28,7 +28,9 @@ class TableViewController: UITableViewController {
         let backgroundImage = UIImage(named: "secondBackGround")
         self.tableView.backgroundView = UIImageView(image: backgroundImage)
         self.tableView.backgroundColor = .black
+        //navigationBar.isHidden = true
         
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,7 +86,10 @@ class TableViewController: UITableViewController {
         cell.textLabel?.text = storedWords.name
         cell.detailTextLabel?.textColor = .black
         cell.detailTextLabel?.text = storedWords.translation
-        
+        if storedWords.image != nil {
+        let image = UIImage(data: storedWords.image!)
+            cell.imageView?.image = image
+        }
         return cell
     
 }
@@ -99,7 +104,8 @@ class TableViewController: UITableViewController {
         //nextVC?.isHidden = true
         guard cell?.textLabel?.text != "" else {return}
         nextVC?.editedtext = (cell?.textLabel?.text)!
-        //nextVC?.wordText =
+        nextVC?.editedTranlation = cell?.detailTextLabel?.text
+        nextVC?.image = cell?.imageView?.image!
         
         show(nextVC!, sender: nil)
         
@@ -133,80 +139,104 @@ class TableViewController: UITableViewController {
             } else if editingStyle == .insert {
         }
     }
+    
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+        
+    }
+    
+    
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    }
 }
+
+
+
+
 
 
 // MARK: - AddNewWordDelegateExtension
 extension TableViewController: AddNewWordDelegate {
     
-    
-    func getArrayOfNames() -> [String] {
-        
-        var names:[String] = []
-        guard CoreDataArray != nil else {return []}
-        for name in CoreDataArray! {
-            names.append(name.name!)
-        }
-        print("HereisAnArray\(names)")
-
-        return names
-        
+    func addWord(word: String, translation: String) {
     }
     
-    func shouldReplace(item: String, withItem newItem: String)
     
-    {
+    
+    func addImage(image: Data) {
+        
+        if image != nil {
+            let newWord = Words(context: context)
+            newWord.image = image
+            CoreDataArray?.append(newWord)
+            try!context.save()
+        }
+    }
+    
+   
+
+    func deleteItem(name: String) {
+        
+        for i in CoreDataArray! {
+            if i.name == name {
+                context.delete(i)
+            }
+        }
+    }
+    
+    
+    func translationReplace(translation: String, with newTranslation: String) {
+       
+        for i in CoreDataArray! {
+            if i.translation == translation {
+                print("itExist")
+                i.translation = newTranslation
+            } else {
+                print("NoSuchAlement")
+            }
+        }
+    }
+    
+    func shouldReplace(item: String, withItem newItem: String) {
         for i in CoreDataArray! {
             
             if i.name == item {
                 print("ItExists")
                 i.name = newItem
+            
+            
             }
             else {
                 print("NoSuchAElement")
             }
-            
         }
-     
-        
     }
         
-      
-    
-    
-    
-func isItemExist(item: String) -> Bool {
+    func isItemExist(item: String, translation: String) -> Bool {
     
     var bool: Bool?
     //guard bool != nil else {return false}
     for name in CoreDataArray! {
-        if name.name == item {
+        if name.name == item && name.translation == translation {
     bool = true
         } else {
             bool = false
         }
     }
-    
-    //guard bool != nil else {return false}
+    guard bool != nil else {return false}
     return bool!
 }
-//MARK: - UsingGetArrayOfnamesFunc
-        /*
-        if let _ = getArrayOfNames().lastIndex(of: item){
-            return true
-        } else {
-            return false
-        }
- */
-   
-    func addWord(word: String) {
+
+    func addWord(word: String, translation: String, image: Data) {
         let newWord = Words(context: context)
         newWord.name = word
-        //newWord.translation = translation
+        newWord.translation = translation
+        newWord.image = image
         CoreDataArray?.append(newWord)
          try! context.save()
         tableView.reloadData()
-    
     }
 }
 
