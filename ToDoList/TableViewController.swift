@@ -9,26 +9,29 @@
 import UIKit
 import CoreData
 
+@available(iOS 14.0, *)
 class TableViewController: UITableViewController {
     
    //MARK: - IBoutlets
     @IBOutlet weak var Add: UIBarButtonItem!
     @IBOutlet weak var editButton: UIBarButtonItem!
-    @IBOutlet weak var navigationBar: UINavigationBar!
     
-    // MARK: - CoreDataProperties
+        // MARK: - CoreDataProperties
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var CoreDataArray: [Words]?
 
     
     override func viewDidLoad() {
     
+        self.title = "WordList"
+    
         // MARK: - TableViewLook
         self.tableView.tintColor = .white
         let backgroundImage = UIImage(named: "secondBackGround")
         self.tableView.backgroundView = UIImageView(image: backgroundImage)
         self.tableView.backgroundColor = .black
-        //navigationBar.isHidden = true
+        self.navigationController?.navigationBar.barTintColor = .black
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
     
     }
@@ -37,6 +40,9 @@ class TableViewController: UITableViewController {
         super.viewWillAppear(true)
         fetchItems()
         
+        UIView.animate(withDuration: 1, animations: {
+            //tableView.visibleCells
+        }, completion: nil)
     }
     
 
@@ -52,11 +58,13 @@ class TableViewController: UITableViewController {
     }
  
     // MARK: - IBActions
-    @IBAction func editButton(_ sender: UIBarButtonItem) {
+    
+    @IBAction func editButtonAction(_ sender: Any) {
         tableView.setEditing(!tableView.isEditing, animated: true)
-        
     }
-    @IBAction func addAction(_ sender: Any) {
+    
+    
+    @IBAction func addButtonAction(_ sender: Any) {
         
         let mainStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
         let ThirdVC = mainStoryboard.instantiateViewController(withIdentifier: "ThirdVC") as? WordsCard
@@ -64,9 +72,12 @@ class TableViewController: UITableViewController {
         ThirdVC?.color = .black
         ThirdVC?.addWordDelegate = self
         self.navigationController?.pushViewController(ThirdVC!,animated: true)
-    
     }
-   
+    
+    @IBAction func translationOnOff(_ sender: Any) {
+    }
+    
+    
     // MARK: - TableViewDataSourceAndDelegate
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
         -> Int {
@@ -76,36 +87,43 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Сellidentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Сellidentifier", for: indexPath) as! WordsTableCell
         
         guard CoreDataArray != nil else {return cell}
        
         try! context.save()
         let storedWords = CoreDataArray![indexPath.row]
         
-        cell.textLabel?.text = storedWords.name
-        cell.detailTextLabel?.textColor = .black
-        cell.detailTextLabel?.text = storedWords.translation
-        if storedWords.image != nil {
-        let image = UIImage(data: storedWords.image!)
-            cell.imageView?.image = image
-        }
+        
+        cell.cellSegmentedControl.isHidden = true
+        cell.wordCellImageView.image = UIImage(data: storedWords.image!)
+        tableViewCellImageViewDesign(element: cell.wordCellImageView)
+        cell.wordCellWordLabel.text = storedWords.name
+        cell.wordCellTranslationLabel.text = storedWords.translation
+    
         return cell
     
 }
 
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        UIView.animate(withDuration: 0.5, delay: 0.1*Double(indexPath.row)) {
+            cell.alpha = 0
+            cell.alpha = 1
+        }
+        
+    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
-        let cell = tableView.cellForRow(at: indexPath)
+        let cell = tableView.cellForRow(at: indexPath) as! WordsTableCell
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nextVC = storyboard.instantiateViewController(withIdentifier: "ThirdVC") as? WordsCard
+        
         nextVC?.addWordDelegate = self
-        //nextVC?.isHidden = true
-        guard cell?.textLabel?.text != "" else {return}
-        nextVC?.editedtext = (cell?.textLabel?.text)!
-        nextVC?.editedTranlation = cell?.detailTextLabel?.text
-        nextVC?.image = cell?.imageView?.image!
+        nextVC?.editedtext = cell.wordCellWordLabel.text
+        nextVC?.editedTranlation = cell.wordCellTranslationLabel.text
+        nextVC?.editedImage = cell.wordCellImageView.image
         
         show(nextVC!, sender: nil)
         
@@ -142,11 +160,8 @@ class TableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
-        
+        return 100
     }
-    
-    
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
     }
@@ -158,12 +173,12 @@ class TableViewController: UITableViewController {
 
 
 // MARK: - AddNewWordDelegateExtension
+@available(iOS 14.0, *)
 extension TableViewController: AddNewWordDelegate {
     
+
     func addWord(word: String, translation: String) {
     }
-    
-    
     
     func addImage(image: Data) {
         
@@ -172,13 +187,11 @@ extension TableViewController: AddNewWordDelegate {
             newWord.image = image
             CoreDataArray?.append(newWord)
             try!context.save()
+            
         }
     }
     
-   
-
     func deleteItem(name: String) {
-        
         for i in CoreDataArray! {
             if i.name == name {
                 context.delete(i)
@@ -195,18 +208,29 @@ extension TableViewController: AddNewWordDelegate {
                 i.translation = newTranslation
             } else {
                 print("NoSuchAlement")
+            
+            }
+        }
+    }
+    
+    func imageReplace(image: Data, newImage: Data) {
+        
+        for i in CoreDataArray! {
+            if i.image == image {
+                i.image = newImage
+            } else {
+                print("No such Image")
             }
         }
     }
     
     func shouldReplace(item: String, withItem newItem: String) {
+        
         for i in CoreDataArray! {
             
             if i.name == item {
                 print("ItExists")
                 i.name = newItem
-            
-            
             }
             else {
                 print("NoSuchAElement")
@@ -214,12 +238,12 @@ extension TableViewController: AddNewWordDelegate {
         }
     }
         
-    func isItemExist(item: String, translation: String) -> Bool {
+    func isItemExist(item: String, translation: String, image: Data) -> Bool {
     
     var bool: Bool?
-    //guard bool != nil else {return false}
+    
     for name in CoreDataArray! {
-        if name.name == item && name.translation == translation {
+        if name.name == item && name.translation == translation && name.image == image {
     bool = true
         } else {
             bool = false

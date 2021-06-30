@@ -8,6 +8,8 @@
 
 import UIKit
 
+@available(iOS 14.0, *)
+@available(iOS 14.0, *)
 class LaunchViewController: UIViewController {
 
     @IBOutlet weak var imageFish: UIImageView!

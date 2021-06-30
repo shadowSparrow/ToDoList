@@ -13,6 +13,7 @@
 		04C6299F263DCA45002C161E /* Words+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6299D263DCA45002C161E /* Words+CoreDataProperties.swift */; };
 		04DD6294264C0D3D00023931 /* designPatterns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DD6293264C0D3D00023931 /* designPatterns.swift */; };
 		04DD62AB265D537300023931 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DD62AA265D537300023931 /* Protocols.swift */; };
+		04F4B3DC267FC8080083E9D3 /* WordsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4B3DB267FC8080083E9D3 /* WordsTableCell.swift */; };
 		F434FE62252D3A4700331C33 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434FE61252D3A4700331C33 /* LaunchViewController.swift */; };
 		F4CAA037231AB648007C1E84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAA036231AB648007C1E84 /* AppDelegate.swift */; };
 		F4CAA03C231AB648007C1E84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4CAA03A231AB648007C1E84 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 		04C6299D263DCA45002C161E /* Words+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Words+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		04DD6293264C0D3D00023931 /* designPatterns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = designPatterns.swift; sourceTree = "<group>"; };
 		04DD62AA265D537300023931 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		04F4B3DB267FC8080083E9D3 /* WordsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTableCell.swift; sourceTree = "<group>"; };
 		F434FE61252D3A4700331C33 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		F4CAA033231AB648007C1E84 /* WordList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4CAA036231AB648007C1E84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				F4CAA036231AB648007C1E84 /* AppDelegate.swift */,
 				F434FE61252D3A4700331C33 /* LaunchViewController.swift */,
 				F4CAA048231C2B0E007C1E84 /* TableViewController.swift */,
+				04F4B3DB267FC8080083E9D3 /* WordsTableCell.swift */,
 				0482AF16262CC37E00B2F6A3 /* WordsCard.swift */,
 				04DD62AA265D537300023931 /* Protocols.swift */,
 				04DD6293264C0D3D00023931 /* designPatterns.swift */,
@@ -171,6 +174,7 @@
 				04DD62AB265D537300023931 /* Protocols.swift in Sources */,
 				041DF0EE262C629500F0DF49 /* Words.xcdatamodeld in Sources */,
 				0482AF17262CC37E00B2F6A3 /* WordsCard.swift in Sources */,
+				04F4B3DC267FC8080083E9D3 /* WordsTableCell.swift in Sources */,
 				F4CAA049231C2B0E007C1E84 /* TableViewController.swift in Sources */,
 				F434FE62252D3A4700331C33 /* LaunchViewController.swift in Sources */,
 				04C6299F263DCA45002C161E /* Words+CoreDataProperties.swift in Sources */,

@@ -13,11 +13,10 @@ protocol AddNewWordDelegate {
     
     func addWord(word:String, translation: String, image: Data)
     //func addImage(image:UIImage)
-    func isItemExist(item: String, translation: String) -> Bool
+    func isItemExist(item: String, translation: String, image: Data) -> Bool
     func shouldReplace(item: String, withItem newItem: String)
     func translationReplace(translation: String, with newTranslation: String)
     
-    func addImage(image: Data)
-    
+    func imageReplace(image: Data, newImage: Data)
     func deleteItem(name: String)
 }
